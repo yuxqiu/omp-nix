@@ -47,6 +47,15 @@ nix profile install github:yuxqiu/omp-nix
 }
 ```
 
+## NixOS compatibility
+
+On Linux/NixOS, the downloaded binary is a Bun-compiled standalone executable that requires a dynamic linker wrapper. The flake handles this automatically by:
+
+- Wrapping the binary with the Nix-provided `ld-linux` interpreter
+- Setting `BUN_SELF_EXE` so Bun correctly resolves its embedded bytecode (see [oven-sh/bun#26752](https://github.com/oven-sh/bun/issues/26752))
+
+On macOS, the binary works directly without a wrapper.
+
 ## Supported platforms
 
 | Platform | Arch |
