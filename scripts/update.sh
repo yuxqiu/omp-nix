@@ -38,8 +38,8 @@ declare -A HASHES
 for asset_name in "${!ASSET_MAP[@]}"; do
   url=$(echo "${RELEASE_JSON}" | jq -r ".assets[] | select(.name == \"${asset_name}\") | .browser_download_url")
   if [[ -z "$url" ]]; then
-    echo "WARNING: Asset ${asset_name} not found in release"
-    continue
+    echo "ERROR: Asset ${asset_name} not found in release" >&2
+    exit 1
   fi
 
   echo "Computing hash for ${asset_name}..."
@@ -59,7 +59,7 @@ jq -n \
   --arg linux_arm64_url "${URLS[linux.aarch64]}" \
   --arg linux_arm64_hash "${HASHES[linux.aarch64]}" \
   --arg darwin_x64_url "${URLS[darwin.x86_64]}" \
-  --arg darwin_x64_hash "${HASHES[darwin.x64]}" \
+  --arg darwin_x64_hash "${HASHES[darwin.x86_64]}" \
   --arg darwin_arm64_url "${URLS[darwin.aarch64]}" \
   --arg darwin_arm64_hash "${HASHES[darwin.aarch64]}" \
   '{
