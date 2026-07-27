@@ -1,4 +1,4 @@
-{ stdenv, lib, fetchurl, makeWrapper, version, url, nixHash }:
+{ stdenv, lib, fetchurl, makeWrapper, patchelf, version, url, nixHash }:
 
 let
   omp-bin = stdenv.mkDerivation {
@@ -31,16 +31,26 @@ in stdenv.mkDerivation {
 
   dontUnpack = true;
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper ] ++ lib.optional isLinux patchelf;
+
+  # The release artifact is a Bun single-file executable: the JS bundle lives in
+  # a `.bun` PROGBITS section (~91 MiB) that the Bun runtime locates by reading
+  # its own executable image at startup. Letting the default fixupPhase strip it
+  # breaks that lookup -- the section itself survives, but the binary no longer
+  # initialises its module graph and degrades to a bare Bun runtime, so
+  # `omp --version` prints the Bun version (1.3.x) and every omp subcommand
+  # disappears. Setting the interpreter with patchelf is safe on its own: the
+  # `.bun` bytes come through byte-identical, only shifted. So only the
+  # strip/rpath-shrink fixups need suppressing.
+  dontStrip = true;
+  dontPatchELF = true;
 
   installPhase =
     if isLinux then ''
       runHook preInstall
       mkdir -p $out/bin
-      makeWrapper ${interpreter} $out/bin/omp \
-        --argv0 omp \
-        --set BUN_SELF_EXE ${omp-bin}/bin/omp \
-        --add-flags ${omp-bin}/bin/omp
+      install -m755 ${omp-bin}/bin/omp $out/bin/omp
+      patchelf --set-interpreter ${interpreter} $out/bin/omp
       runHook postInstall
     '' else ''
       runHook preInstall
