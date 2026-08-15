@@ -1,25 +1,25 @@
 {
   "ompVersions": {
-    "version": "17.3.2",
+    "version": "17.3.4",
     "urls": {
       "linux": {
         "x86_64": {
-          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.2/omp-linux-x64",
-          "hash": "sha256-aEnPZEbBBZzJop9HOiLDz5oX0XlzzKiFG5A+VkftqAQ="
+          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.4/omp-linux-x64",
+          "hash": "sha256-P85LJWKAZLDNe/vGJF7NraMxdQ7Us0Gspr0pukR4qrU="
         },
         "aarch64": {
-          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.2/omp-linux-arm64",
-          "hash": "sha256-+lM2Hxu8DYMlY/+7Uk1pECo3M72zs5+uj41dpAWV/LQ="
+          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.4/omp-linux-arm64",
+          "hash": "sha256-jifnv+SfwPM/bLC1ASirhf5UAzMNHftbs0zx90Is3Og="
         }
       },
       "darwin": {
         "x86_64": {
-          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.2/omp-darwin-x64",
-          "hash": "sha256-GSUnjbo6ecAGYG16bC3jsJxh5NtMy50F2cZiERWZn3Y="
+          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.4/omp-darwin-x64",
+          "hash": "sha256-zClVM8MtHl3B/r6MWXLBI15BuWFDGL7FdEHQPEdfcME="
         },
         "aarch64": {
-          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.2/omp-darwin-arm64",
-          "hash": "sha256-+bLo57q6wnznRKFgw5e+n/JMztnzwsDPZcJM/yESQaY="
+          "url": "https://github.com/can1357/oh-my-pi/releases/download/v17.3.4/omp-darwin-arm64",
+          "hash": "sha256-dqbCL4ukujGePVKK3NkhlJ4DOPKxMEJyHmS5kPb//hY="
         }
       }
     }
